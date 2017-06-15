@@ -16,7 +16,6 @@ keep_prob = tf.placeholder(tf.float32)
 #    ksize:   the size of he size of the pooling window, in our case the window is 2*2
 def conv2d(x, W):
   return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='SAME')
-
 def maxpool2d(x):
   return tf.nn.max_pool(x, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
 
