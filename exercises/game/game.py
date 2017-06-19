@@ -1,10 +1,13 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 import pygame
 import random
 from pygame.locals import *
 import numpy as np
 from collections import deque
 import tensorflow as tf  # http://blog.topspeedsnail.com/archives/10116
-import cv3               # http://blog.topspeedsnail.com/archives/4755
+import cv2               # http://blog.topspeedsnail.com/archives/4755
  
 BLACK     = (0  ,0  ,0  )
 WHITE     = (255,255,255)
@@ -81,10 +84,10 @@ LEARNING_RATE = 0.99
 INITIAL_EPSILON = 1.0
 FINAL_EPSILON = 0.05
 # 测试观测次数
-EXPLORE = 500000 
-OBSERVE = 50000
+EXPLORE = 500000000
+OBSERVE = 500000000
 # 存储过往经验大小
-REPLAY_MEMORY = 500000
+REPLAY_MEMORY = 90000000000
  
 BATCH = 100
  
@@ -123,7 +126,7 @@ def train_neural_network(input_image):
 	argmax = tf.placeholder("float", [None, output])
 	gt = tf.placeholder("float", [None])
  
-	action = tf.reduce_sum(tf.mul(predict_action, argmax), reduction_indices = 1)
+	action = tf.reduce_sum(tf.matmul(predict_action, argmax), reduction_indices = 1)
 	cost = tf.reduce_mean(tf.square(action - gt))
 	optimizer = tf.train.AdamOptimizer(1e-6).minimize(cost)
  
